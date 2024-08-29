@@ -27,7 +27,7 @@ public class AdminController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Admin loginRequest) {
-        Optional<Admin> adminOpt=adminService.findByUsername(loginRequest.getUsername());
+        Optional<Admin> adminOpt = adminService.findByUsername(loginRequest.getUsername());
         if (adminOpt.isPresent()) {
             Admin admin = adminOpt.get();
             boolean isPasswordMatch = adminService.checkPassword(admin, loginRequest.getPassword());
@@ -41,6 +41,17 @@ public class AdminController {
             return ResponseEntity.status(401).body("Invalid username or password.");
         }
     }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Admin> getAdminById(@PathVariable Long id) {
+//        Optional<Admin> adminOpt = adminService.findById(id);
+//        if (adminOpt.isPresent()) {
+//            Admin admin = adminOpt.get();
+//            return ResponseEntity.ok(admin);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 }
 
 

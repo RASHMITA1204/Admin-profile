@@ -20,6 +20,7 @@ public class AdminService {
 
     public Admin register(Admin admin) {
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        admin.setRole("ADMIN");
         return adminRepository.save(admin);
     }
 
@@ -28,6 +29,9 @@ public class AdminService {
     }
     public boolean checkPassword(Admin admin,String rawPassword){
         return passwordEncoder.matches(rawPassword, admin.getPassword());
+    }
+    public Optional<Admin>findById(Long id){
+        return adminRepository.findById(id);
     }
 }
 
